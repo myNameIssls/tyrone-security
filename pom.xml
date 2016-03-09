@@ -11,53 +11,62 @@
 	<url>http://maven.apache.org</url>
 	
 	<properties>
+		<org.aspectj-version>1.8.8</org.aspectj-version>
 		<org.apache.shiro-version>1.2.4</org.apache.shiro-version>
-		<org.springframework-version>4.2.4.RELEASE</org.springframework-version>
-		<jstl-version>1.2</jstl-version>
-		<taglibs-version>1.1.2</taglibs-version>
-		<junit-version>4.12</junit-version>
-	</properties>
+        <org.springframework-version>4.2.4.RELEASE</org.springframework-version>
+        <jstl-version>1.2</jstl-version>
+        <taglibs-version>1.1.2</taglibs-version>
+        <junit-version>4.12</junit-version>
+    </properties>
 	
 	<dependencies>
 		
 		<!-- Shiro -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-core</artifactId>
-			<version>${org.apache.shiro-version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-web</artifactId>
-			<version>${org.apache.shiro-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-spring</artifactId>
-			<version>${org.apache.shiro-version}</version>
-		</dependency>
-		
+	    <dependency>
+	        <groupId>org.apache.shiro</groupId>
+	        <artifactId>shiro-core</artifactId>
+	        <version>${org.apache.shiro-version}</version>
+	    </dependency>
+	
+	    <dependency>
+	        <groupId>org.apache.shiro</groupId>
+	        <artifactId>shiro-web</artifactId>
+	        <version>${org.apache.shiro-version}</version>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>org.apache.shiro</groupId>
+	        <artifactId>shiro-spring</artifactId>
+	        <version>${org.apache.shiro-version}</version>
+	    </dependency>
 		
 		<!-- SpringMVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+		
+		<!-- org.aspectj -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
 		</dependency>
-	
+		
+		<!-- JSTL -->
 		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl-version}</version>
-		</dependency>
-	
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl-version}</version>
+        </dependency>
+		
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>${junit-version}</scope>
-		</dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+        </dependency>
+
 	</dependencies>
 	
 	
