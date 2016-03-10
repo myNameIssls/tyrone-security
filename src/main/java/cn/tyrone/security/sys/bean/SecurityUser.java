@@ -1,8 +1,18 @@
 package cn.tyrone.security.sys.bean;
 
-public class SysUser {
+public class SecurityUser {
+	private String userId;
 	private String username;
 	private String password;
+	private String status;
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public String getUsername() {
 		return username;
@@ -18,6 +28,14 @@ public class SysUser {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

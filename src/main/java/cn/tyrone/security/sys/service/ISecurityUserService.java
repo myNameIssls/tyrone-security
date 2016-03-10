@@ -1,8 +1,8 @@
 package cn.tyrone.security.sys.service;
 
-import cn.tyrone.security.sys.bean.SysUser;
+import cn.tyrone.security.sys.bean.SecurityUser;
 
-public interface ISysUserService {
+public interface ISecurityUserService {
 	
 	/**
 	 * 根据用户名获取用户信息
@@ -11,6 +11,6 @@ public interface ISysUserService {
 	 * @param principal
 	 * @return 用户信息
 	 */
-	SysUser getSysUserByUsername(String username);
+	SecurityUser getSysUserByUsername(String username);
 
 }

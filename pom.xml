@@ -11,6 +11,12 @@
 	<url>http://maven.apache.org</url>
 	
 	<properties>
+		<c3p0-version>0.9.1.2</c3p0-version>
+		<org.mybatis.generator-version>1.3.2</org.mybatis.generator-version>
+		<mysql-version>5.1.38</mysql-version>
+		<druid-version>1.0.17</druid-version>
+		<org.mybatis-version>3.3.1</org.mybatis-version>
+		<mybatis-spring-version>1.2.4</mybatis-spring-version>
 		<org.aspectj-version>1.8.8</org.aspectj-version>
 		<org.apache.shiro-version>1.2.4</org.apache.shiro-version>
         <org.springframework-version>4.2.4.RELEASE</org.springframework-version>
@@ -20,6 +26,40 @@
     </properties>
 	
 	<dependencies>
+		
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-version}</version>
+		</dependency>
+		
+		<!-- druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid-version}</version>
+		</dependency>
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>c3p0</groupId> -->
+<!-- 			<artifactId>c3p0</artifactId> -->
+<!-- 			<version>${c3p0-version}</version> -->
+<!-- 		</dependency> -->
+		
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${org.mybatis-version}</version>
+		</dependency>
+		
+		<!-- mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring-version}</version>
+		</dependency>
 		
 		<!-- Shiro -->
 	    <dependency>
@@ -39,6 +79,18 @@
 	        <artifactId>shiro-spring</artifactId>
 	        <version>${org.apache.shiro-version}</version>
 	    </dependency>
+		
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		
 		<!-- SpringMVC -->
         <dependency>
@@ -70,7 +122,26 @@
 	</dependencies>
 	
 	
+	
 	<build>
+		
+<!-- 		<plugins> -->
+			<!-- mybatis-generator-maven-plugin  -->
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.mybatis.generator</groupId> -->
+<!-- 				<artifactId>mybatis-generator-maven-plugin</artifactId> -->
+<!-- 				<version>${org.mybatis.generator-version}</version> -->
+<!-- 				<dependencies> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>mysql</groupId> -->
+<!-- 						<artifactId>mysql-connector-java</artifactId> -->
+<!-- 						<version>${mysql-version}</version> -->
+<!-- 					</dependency> -->
+<!-- 				</dependencies> -->
+<!-- 			</plugin> -->
+<!-- 		</plugins> -->
+		
 		<finalName>tyrone-security</finalName>
+		
 	</build>
 </project>

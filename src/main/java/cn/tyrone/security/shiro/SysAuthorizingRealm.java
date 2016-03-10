@@ -12,8 +12,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import cn.tyrone.security.sys.bean.SysUser;
-import cn.tyrone.security.sys.service.ISysUserService;
+import cn.tyrone.security.sys.bean.SecurityUser;
+import cn.tyrone.security.sys.service.ISecurityUserService;
 
 /**
  * 自定义realm实现认证和授权
@@ -22,7 +22,7 @@ import cn.tyrone.security.sys.service.ISysUserService;
  */
 public class SysAuthorizingRealm extends AuthorizingRealm {
 	
-	@Resource private ISysUserService sysUserService;
+	@Resource private ISecurityUserService sysUserService;
 	
 	/**
 	 * 认证
@@ -38,7 +38,7 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 		
 		SimpleAuthenticationInfo simpleAuthenticationInfo = null;
 		
-		SysUser sysUser = sysUserService.getSysUserByUsername(principal);
+		SecurityUser sysUser = sysUserService.getSysUserByUsername(principal);
 		
 		if(sysUser != null){
 			if(credentials.equals(sysUser.getPassword())){
