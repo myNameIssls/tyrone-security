@@ -1,5 +1,8 @@
 package cn.tyrone.security.shiro;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,7 +14,9 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 
+import cn.tyrone.security.sys.bean.SecurityPermission;
 import cn.tyrone.security.sys.bean.SecurityUser;
 import cn.tyrone.security.sys.service.ISecurityUserService;
 
@@ -39,10 +44,10 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 		SimpleAuthenticationInfo simpleAuthenticationInfo = null;
 		
 		SecurityUser sysUser = sysUserService.getSysUserByUsername(principal);
-		
+		String salt = "1";
 		if(sysUser != null){
 			if(credentials.equals(sysUser.getPassword())){
-				simpleAuthenticationInfo = new SimpleAuthenticationInfo(sysUser,credentials,this.getName());
+				simpleAuthenticationInfo = new SimpleAuthenticationInfo(sysUser,credentials,ByteSource.Util.bytes(salt) ,this.getName());
 			}
 		}
 		
@@ -50,14 +55,31 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 		
 	}
 	
+	/**
+	 * 授权
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
+		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 		
-		SimpleAuthorizationInfo simpAuthorizationInfo = new SimpleAuthorizationInfo();
+//		SecurityUser securityUser = (SecurityUser) principals.getPrimaryPrincipal();
 		
-		simpAuthorizationInfo.addStringPermission("securityuser:list");
-		return simpAuthorizationInfo;
+		SecurityPermission sp = new SecurityPermission();
+		sp.setId("123456");
+		sp.setPermissionName("用户列表查询");
+		sp.setPermissionCode("securityuser:list");
+		
+		List<SecurityPermission> securityPermissionList = new ArrayList<SecurityPermission>();
+		
+		securityPermissionList.add(sp);
+		
+		for(SecurityPermission securityPermission : securityPermissionList){
+			simpleAuthorizationInfo.addStringPermission(securityPermission.getPermissionCode());
+		}
+		
+		
+		return simpleAuthorizationInfo;
 	}
 
 }

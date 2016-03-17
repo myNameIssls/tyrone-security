@@ -92,4 +92,8 @@
 		SELECT * FROM security_user t WHERE t.USER_NAME = #{username}
 	</select>
 	
+	<select id="getDataList" parameterType="cn.tyrone.security.sys.bean.SecurityUser" resultMap="BaseResultMap">
+			SELECT * FROM security_user t 
+	</select>
+	
 </mapper>

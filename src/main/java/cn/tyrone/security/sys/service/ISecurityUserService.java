@@ -1,5 +1,7 @@
 package cn.tyrone.security.sys.service;
 
+import java.util.List;
+
 import cn.tyrone.security.sys.bean.SecurityUser;
 
 public interface ISecurityUserService {
@@ -12,5 +14,7 @@ public interface ISecurityUserService {
 	 * @return 用户信息
 	 */
 	SecurityUser getSysUserByUsername(String username);
+
+	List<SecurityUser> getDataList(SecurityUser securityUser);
 
 }

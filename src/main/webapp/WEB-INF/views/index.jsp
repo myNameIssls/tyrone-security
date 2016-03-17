@@ -9,22 +9,25 @@
 
 <script type="text/javascript">
 	$(function(){
+		
 		$("#login-btn").click(function(){
 			$("#login-form").submit();
 		});
-	})
+
+
+	});
 </script>
 
 </head>
 <body>
 	<div style="position:absolute;top:50%;margin-top:-132px;left:50%;margin-left:-200px;">
-		<form id="login-form" action="${ctx}/sys/login" method="post">
+		<form id="login-form" method="post" >
 		    <div class="easyui-panel" title="Login to system"  style="width:400px;padding:30px 70px 20px 70px;" >
 		        <div style="margin-bottom:10px">
-		            <input name="username" value="admin" class="easyui-textbox" style="width:100%;height:40px;padding:12px" data-options="prompt:'Username',iconCls:'icon-man',iconWidth:38">
+		            <input name="username" class="easyui-textbox" value="admin" style="width:100%;height:40px;padding:12px" data-options="prompt:'Username',iconCls:'icon-man',iconWidth:38">
 		        </div>
 		        <div style="margin-bottom:20px">
-		            <input name="password" value="admin" class="easyui-textbox" type="password" style="width:100%;height:40px;padding:12px" data-options="prompt:'Password',iconCls:'icon-lock',iconWidth:38">
+		            <input name="password" class="easyui-textbox" value="admin" type="password" style="width:100%;height:40px;padding:12px" data-options="prompt:'Password',iconCls:'icon-lock',iconWidth:38">
 		        </div>
 		        <div style="margin-bottom:20px">
 		            <input type="checkbox" checked="checked">
@@ -36,7 +39,7 @@
 		            </a>
 		        </div>
 		    </div>
-		</form>
+		 </form>
 	</div>
 </body>
 </html>

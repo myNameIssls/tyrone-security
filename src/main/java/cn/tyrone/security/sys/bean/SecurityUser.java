@@ -1,10 +1,24 @@
 package cn.tyrone.security.sys.bean;
 
-public class SecurityUser {
+import java.io.Serializable;
+import java.util.List;
+
+public class SecurityUser implements Serializable {
 	private String userId;
 	private String username;
 	private String password;
 	private String status;
+	
+	private List<SecurityPermission> securityPermissionList;
+	
+	public List<SecurityPermission> getSecurityPermissionList() {
+		return securityPermissionList;
+	}
+
+	public void setSecurityPermissionList(
+			List<SecurityPermission> securityPermissionList) {
+		this.securityPermissionList = securityPermissionList;
+	}
 
 	public String getUserId() {
 		return userId;

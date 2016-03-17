@@ -17,7 +17,7 @@
 			<div id="aa" class="easyui-accordion" fit=true border="true">  
 			    
 			    <div title="系统管理"  selected="true" style="overflow:auto;padding:10px;">  
-					<ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true,lines:true"></ul>
+			    	<a href="#" onclick="addTab('用户管理列表','${ctx}/securityUser/list')">用户管理列表</a>
 			    </div>  
 			    
 			    <div title="用户管理" style="overflow:auto;padding:10px;">  
@@ -25,7 +25,7 @@
 			    	<a title="jsp/002_window.jsp" >用户功能</a> 
 			    </div>  
 			    <div title="岗位管理"  style="padding:10px;">  
-			    	<a href="#" onclick="addTab('用户管理列表','${pageContext.request.contextPath}/securityuser/list')">用户管理列表</a>
+			    	<a href="#" onclick="addTab('用户管理列表','${pageContext.request.contextPath}/securityUser/list')">用户管理列表</a>
 			    </div>  
 			</div>  
 		</div>

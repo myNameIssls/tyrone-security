@@ -1,5 +1,7 @@
 package cn.tyrone.security.sys.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import cn.tyrone.security.sys.bean.SecurityUser;
@@ -18,4 +20,6 @@ public interface SecurityUserMapper {
     int updateByPrimaryKey(SecurityUser record);
 
 	SecurityUser getSysUserByUsername(@Param(value = "username") String username);
+
+	List<SecurityUser> getDataList(SecurityUser securityUser);
 }

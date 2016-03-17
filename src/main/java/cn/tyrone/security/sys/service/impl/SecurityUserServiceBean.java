@@ -1,5 +1,7 @@
 package cn.tyrone.security.sys.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -26,6 +28,11 @@ public class SecurityUserServiceBean implements ISecurityUserService {
 			return securityUser;
 		}
 		return null;
+	}
+
+	public List<SecurityUser> getDataList(SecurityUser securityUser) {
+		
+		return securityUserMapper.getDataList(securityUser);
 	}
 
 }
