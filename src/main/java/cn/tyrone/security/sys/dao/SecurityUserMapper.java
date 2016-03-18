@@ -19,7 +19,32 @@ public interface SecurityUserMapper {
 
     int updateByPrimaryKey(SecurityUser record);
 
+    /**
+     * 根据用户名获取用户信息
+     * @author Tyrone.Shang
+     * @date 2016-03-18
+     * @param username 
+     * @return
+     */
 	SecurityUser getSysUserByUsername(@Param(value = "username") String username);
 
 	List<SecurityUser> getDataList(SecurityUser securityUser);
+
+	/**
+	 * 根据用户ID获取用户所有角色
+	 * @author Tyrone.Shang
+	 * @date 2016-03-18
+	 * @param securityUserId
+	 * @return
+	 */
+	SecurityUser getSecurityRoleById(String securityUserId);
+
+	/**
+	 * 根据用户ID获取用户所有权限
+	 * @author Tyrone.Shang
+	 * @date 2016-03-18
+	 * @param securityUserId
+	 * @return
+	 */
+	SecurityUser getSecurityPermissionById(String securityUserId);
 }

@@ -59,7 +59,7 @@
 			暂不明白 <property name="ignoreQualifiersAtRuntime" value="true" />
 			暂不明白 <property name="runtimeTableName" value="Busi_Param" />
 		</table> -->		
-		<table tableName="security_user" domainObjectName="SecurityUser"
+		<table tableName="security_menu" domainObjectName="SecurityMenu"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">			
 		</table>

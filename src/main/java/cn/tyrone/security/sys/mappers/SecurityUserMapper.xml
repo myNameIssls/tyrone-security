@@ -5,7 +5,15 @@
 		<id column="USER_ID" property="userId" jdbcType="VARCHAR" />
 		<result column="USER_NAME" property="username" jdbcType="VARCHAR" />
 		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="locked" property="locked" />
+		<result column="salt" property="salt" />
+		
+		<collection property="securityRoleList" columnPrefix="sr_" 
+			resultMap="cn.tyrone.security.sys.dao.SecurityRoleMapper.BaseResultMap"></collection>
+		
+		<collection property="securityPermissionList" columnPrefix="sp_" 
+		resultMap="cn.tyrone.security.sys.dao.SecurityPermissionMapper.BaseResultMap"></collection>
+		
 	</resultMap>
 	<sql id="Base_Column_List">
 		USER_ID, LOGIN_NAME, PASSWORD, STATUS
@@ -88,12 +96,44 @@
 		USER_ID = #{userId,jdbcType=VARCHAR}
 	</update>
 	
-	<select id="getSysUserByUsername" parameterType="Object" resultMap="BaseResultMap">
+	<!-- 根据用户名获取用户信息 -->
+	<select id="getSysUserByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
 		SELECT * FROM security_user t WHERE t.USER_NAME = #{username}
 	</select>
 	
 	<select id="getDataList" parameterType="cn.tyrone.security.sys.bean.SecurityUser" resultMap="BaseResultMap">
 			SELECT * FROM security_user t 
+	</select>
+	
+	<!-- 根据用户ID获取用户所有角色 -->
+	<select id="getSecurityRoleById" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT 
+			su.*,
+			sr.`ID` sr_id,
+			sr.`ROLE_CODE` sr_role_code,
+			sr.`ROLE_NAME` sr_role_name,
+			sr.`ROLE_GROUP` sr_role_group,
+			sr.`AVAILABLE` sr_available
+		FROM security_user su
+		INNER JOIN security_user_role ur ON ur.USER_ID = su.USER_ID
+		INNER JOIN security_role sr ON sr.`ID` = ur.`ROLE_ID`
+		WHERE su.user_id = #{value}
+	</select>
+	
+	<!-- 根据用户ID获取用户所有权限 -->
+	<select id="getSecurityPermissionById" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT 
+			su.*,
+			sp.`ID` sp_id,
+			sp.`PERMISSION_NAME` sp_PERMISSION_NAME,
+			sp.`PERMISSION_CODE` sp_PERMISSION_CODE,
+			sp.`AVAILABLE` sp_available
+		FROM security_user su
+		INNER JOIN security_user_role ur ON ur.USER_ID = su.USER_ID
+		INNER JOIN security_role sr ON sr.`ID` = ur.`ROLE_ID`
+		INNER JOIN security_role_permission rp ON rp.role_id = sr.id
+		INNER JOIN security_permission sp ON sp.id = rp.permission_id
+		WHERE su.`USER_ID` = #{value}
 	</select>
 	
 </mapper>

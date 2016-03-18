@@ -7,13 +7,15 @@ public class SecurityPermission implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1919465424381281494L;
+	private static final long serialVersionUID = 1478678722067403599L;
 
 	private String id;
-	
+
 	private String permissionName;
-	
+
 	private String permissionCode;
+
+	private String available;
 
 	public String getId() {
 		return id;
@@ -38,5 +40,13 @@ public class SecurityPermission implements Serializable {
 	public void setPermissionCode(String permissionCode) {
 		this.permissionCode = permissionCode;
 	}
-	
+
+	public String getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(String available) {
+		this.available = available;
+	}
+
 }

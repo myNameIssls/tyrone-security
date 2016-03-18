@@ -4,21 +4,40 @@ import java.io.Serializable;
 import java.util.List;
 
 public class SecurityUser implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6766587419812540063L;
+	
+	/**
+	 * 用户编号
+	 */
 	private String userId;
+	
+	/**
+	 * 用户名，唯一
+	 */
 	private String username;
+	
+	/**
+	 * 用户密码
+	 */
 	private String password;
-	private String status;
+	
+	/**
+	 * 是否锁定
+	 * 【0:示锁定 1:锁定】
+	 */
+	private String locked;
+	
+	/**
+	 * 盐
+	 */
+	private String salt;
+//	private String empId
+	private List<SecurityRole> securityRoleList;
 	
 	private List<SecurityPermission> securityPermissionList;
-	
-	public List<SecurityPermission> getSecurityPermissionList() {
-		return securityPermissionList;
-	}
-
-	public void setSecurityPermissionList(
-			List<SecurityPermission> securityPermissionList) {
-		this.securityPermissionList = securityPermissionList;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -44,12 +63,37 @@ public class SecurityUser implements Serializable {
 		this.password = password;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getLocked() {
+		return locked;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setLocked(String locked) {
+		this.locked = locked;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public List<SecurityRole> getSecurityRoleList() {
+		return securityRoleList;
+	}
+
+	public void setSecurityRoleList(List<SecurityRole> securityRoleList) {
+		this.securityRoleList = securityRoleList;
+	}
+
+	public List<SecurityPermission> getSecurityPermissionList() {
+		return securityPermissionList;
+	}
+
+	public void setSecurityPermissionList(
+			List<SecurityPermission> securityPermissionList) {
+		this.securityPermissionList = securityPermissionList;
 	}
 
 }

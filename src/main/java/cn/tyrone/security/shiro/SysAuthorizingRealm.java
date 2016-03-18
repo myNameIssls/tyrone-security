@@ -1,6 +1,5 @@
 package cn.tyrone.security.shiro;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,7 +26,7 @@ import cn.tyrone.security.sys.service.ISecurityUserService;
  */
 public class SysAuthorizingRealm extends AuthorizingRealm {
 	
-	@Resource private ISecurityUserService sysUserService;
+	@Resource private ISecurityUserService securityUserService;
 	
 	/**
 	 * 认证
@@ -37,18 +36,19 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
-		UsernamePasswordToken UsernamePasswordToken = (UsernamePasswordToken)token;
-		String principal = UsernamePasswordToken.getUsername();	// 获取身份信息，即用户名
-		String credentials = new String(UsernamePasswordToken.getPassword()); // 获取凭证信息，即密码
+		
+		String username = (String)token.getPrincipal();	// 获取身份信息，即用户名
 		
 		SimpleAuthenticationInfo simpleAuthenticationInfo = null;
 		
-		SecurityUser sysUser = sysUserService.getSysUserByUsername(principal);
-		String salt = "1";
-		if(sysUser != null){
-			if(credentials.equals(sysUser.getPassword())){
-				simpleAuthenticationInfo = new SimpleAuthenticationInfo(sysUser,credentials,ByteSource.Util.bytes(salt) ,this.getName());
-			}
+		SecurityUser securityUser = securityUserService.getSysUserByUsername(username);
+		if(securityUser != null){
+			String securityUserId = securityUser.getUserId();
+			String password = securityUser.getPassword();
+			String salt = securityUser.getSalt();
+			simpleAuthenticationInfo = new SimpleAuthenticationInfo(securityUser,password,ByteSource.Util.bytes(salt) ,this.getName());
+		}else{
+			return null;
 		}
 		
 		return simpleAuthenticationInfo;
@@ -61,25 +61,35 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
-		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 		
-//		SecurityUser securityUser = (SecurityUser) principals.getPrimaryPrincipal();
+		SecurityUser securityUser = (SecurityUser) principals.getPrimaryPrincipal();
+		String securityUserId = securityUser.getUserId();
 		
-		SecurityPermission sp = new SecurityPermission();
-		sp.setId("123456");
-		sp.setPermissionName("用户列表查询");
-		sp.setPermissionCode("securityuser:list");
-		
-		List<SecurityPermission> securityPermissionList = new ArrayList<SecurityPermission>();
-		
-		securityPermissionList.add(sp);
-		
-		for(SecurityPermission securityPermission : securityPermissionList){
-			simpleAuthorizationInfo.addStringPermission(securityPermission.getPermissionCode());
-		}
-		
+		SimpleAuthorizationInfo simpleAuthorizationInfo = getSimpleAuthorizationInfo(securityUserId);
 		
 		return simpleAuthorizationInfo;
 	}
-
+	
+	private SimpleAuthorizationInfo getSimpleAuthorizationInfo(String securityUserId){
+		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+		
+		SecurityUser securityUser = securityUserService.getSecurityPermissionById(securityUserId);
+		if(securityUser != null){
+			
+			List<SecurityPermission> securityPermissionList = securityUser.getSecurityPermissionList();
+			
+			if(securityPermissionList != null && securityPermissionList.size() > 0){
+				
+				for(SecurityPermission permission : securityPermissionList){
+					simpleAuthorizationInfo.addStringPermission(permission.getPermissionCode());
+				}
+				
+			}
+			
+		}
+		
+		return simpleAuthorizationInfo;
+		
+	}
+	
 }

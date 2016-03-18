@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tyrone.security.sys.dao.SecurityMenuMapper" >
+  <resultMap id="BaseResultMap" type="cn.tyrone.security.sys.bean.SecurityMenu" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="MENU_PID" property="menuPid" jdbcType="VARCHAR" />
+    <result column="MENU_URL" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="MENU_LEVEL" property="menuLevel" jdbcType="VARCHAR" />
+    <result column="MENU_ORDERBY" property="menuOrderby" jdbcType="VARCHAR" />
+    <result column="AVAILABLE" property="available" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MENU_NAME, MENU_PID, MENU_URL, MENU_LEVEL, MENU_ORDERBY, AVAILABLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from security_menu
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from security_menu
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tyrone.security.sys.bean.SecurityMenu" >
+    insert into security_menu (ID, MENU_NAME, MENU_PID, 
+      MENU_URL, MENU_LEVEL, MENU_ORDERBY, 
+      AVAILABLE)
+    values (#{id,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuPid,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuLevel,jdbcType=VARCHAR}, #{menuOrderby,jdbcType=VARCHAR}, 
+      #{available,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tyrone.security.sys.bean.SecurityMenu" >
+    insert into security_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME,
+      </if>
+      <if test="menuPid != null" >
+        MENU_PID,
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL,
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL,
+      </if>
+      <if test="menuOrderby != null" >
+        MENU_ORDERBY,
+      </if>
+      <if test="available != null" >
+        AVAILABLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPid != null" >
+        #{menuPid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null" >
+        #{menuLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrderby != null" >
+        #{menuOrderby,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tyrone.security.sys.bean.SecurityMenu" >
+    update security_menu
+    <set >
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPid != null" >
+        MENU_PID = #{menuPid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null" >
+        MENU_LEVEL = #{menuLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrderby != null" >
+        MENU_ORDERBY = #{menuOrderby,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null" >
+        AVAILABLE = #{available,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tyrone.security.sys.bean.SecurityMenu" >
+    update security_menu
+    set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      MENU_PID = #{menuPid,jdbcType=VARCHAR},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      MENU_LEVEL = #{menuLevel,jdbcType=VARCHAR},
+      MENU_ORDERBY = #{menuOrderby,jdbcType=VARCHAR},
+      AVAILABLE = #{available,jdbcType=CHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

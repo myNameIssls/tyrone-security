@@ -16,5 +16,23 @@ public interface ISecurityUserService {
 	SecurityUser getSysUserByUsername(String username);
 
 	List<SecurityUser> getDataList(SecurityUser securityUser);
-
+	
+	/**
+	 * 根据用户ID获取用户所有角色
+	 * @author Tyrone.Shang
+	 * @date 2016-03-18
+	 * @param securityUserId
+	 * @return
+	 */
+	public SecurityUser getSecurityRoleById(String securityUserId);
+	
+	/**
+	 * 根据用户ID获取用户所有权限
+	 * @author Tyrone.Shang
+	 * @date 2016-03-18
+	 * @param securityUserId
+	 * @return
+	 */
+	public SecurityUser getSecurityPermissionById(String securityUserId);
+	
 }
