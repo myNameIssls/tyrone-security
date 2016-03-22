@@ -8,7 +8,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -47,8 +46,6 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
 			String password = securityUser.getPassword();
 			String salt = securityUser.getSalt();
 			simpleAuthenticationInfo = new SimpleAuthenticationInfo(securityUser,password,ByteSource.Util.bytes(salt) ,this.getName());
-		}else{
-			return null;
 		}
 		
 		return simpleAuthenticationInfo;

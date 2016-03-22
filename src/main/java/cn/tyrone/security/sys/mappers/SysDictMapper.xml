@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tyrone.security.sys.dao.SysDictMapper" >
+  <resultMap id="BaseResultMap" type="cn.tyrone.security.sys.bean.SysDict" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="DICT_TYPE_KEY" property="dictTypeKey" jdbcType="CHAR" />
+    <result column="DICT_TYPE_VALUE" property="dictTypeValue" jdbcType="VARCHAR" />
+    <result column="DICT_KEY" property="dictKey" jdbcType="CHAR" />
+    <result column="DICT_VALUE" property="dictValue" jdbcType="VARCHAR" />
+    <result column="DICT_ORDER_BY" property="dictOrderBy" jdbcType="INTEGER" />
+    <result column="AVILABLE" property="avilable" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DICT_TYPE_KEY, DICT_TYPE_VALUE, DICT_KEY, DICT_VALUE, DICT_ORDER_BY, AVILABLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dict
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_dict
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.tyrone.security.sys.bean.SysDict" >
+    insert into sys_dict (ID, DICT_TYPE_KEY, DICT_TYPE_VALUE, 
+      DICT_KEY, DICT_VALUE, DICT_ORDER_BY, 
+      AVILABLE)
+    values (#{id,jdbcType=VARCHAR}, #{dictTypeKey,jdbcType=CHAR}, #{dictTypeValue,jdbcType=VARCHAR}, 
+      #{dictKey,jdbcType=CHAR}, #{dictValue,jdbcType=VARCHAR}, #{dictOrderBy,jdbcType=INTEGER}, 
+      #{avilable,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.tyrone.security.sys.bean.SysDict" >
+    insert into sys_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="dictTypeKey != null" >
+        DICT_TYPE_KEY,
+      </if>
+      <if test="dictTypeValue != null" >
+        DICT_TYPE_VALUE,
+      </if>
+      <if test="dictKey != null" >
+        DICT_KEY,
+      </if>
+      <if test="dictValue != null" >
+        DICT_VALUE,
+      </if>
+      <if test="dictOrderBy != null" >
+        DICT_ORDER_BY,
+      </if>
+      <if test="avilable != null" >
+        AVILABLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dictTypeKey != null" >
+        #{dictTypeKey,jdbcType=CHAR},
+      </if>
+      <if test="dictTypeValue != null" >
+        #{dictTypeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictKey != null" >
+        #{dictKey,jdbcType=CHAR},
+      </if>
+      <if test="dictValue != null" >
+        #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictOrderBy != null" >
+        #{dictOrderBy,jdbcType=INTEGER},
+      </if>
+      <if test="avilable != null" >
+        #{avilable,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.tyrone.security.sys.bean.SysDict" >
+    update sys_dict
+    <set >
+      <if test="dictTypeKey != null" >
+        DICT_TYPE_KEY = #{dictTypeKey,jdbcType=CHAR},
+      </if>
+      <if test="dictTypeValue != null" >
+        DICT_TYPE_VALUE = #{dictTypeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictKey != null" >
+        DICT_KEY = #{dictKey,jdbcType=CHAR},
+      </if>
+      <if test="dictValue != null" >
+        DICT_VALUE = #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictOrderBy != null" >
+        DICT_ORDER_BY = #{dictOrderBy,jdbcType=INTEGER},
+      </if>
+      <if test="avilable != null" >
+        AVILABLE = #{avilable,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.tyrone.security.sys.bean.SysDict" >
+    update sys_dict
+    set DICT_TYPE_KEY = #{dictTypeKey,jdbcType=CHAR},
+      DICT_TYPE_VALUE = #{dictTypeValue,jdbcType=VARCHAR},
+      DICT_KEY = #{dictKey,jdbcType=CHAR},
+      DICT_VALUE = #{dictValue,jdbcType=VARCHAR},
+      DICT_ORDER_BY = #{dictOrderBy,jdbcType=INTEGER},
+      AVILABLE = #{avilable,jdbcType=CHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

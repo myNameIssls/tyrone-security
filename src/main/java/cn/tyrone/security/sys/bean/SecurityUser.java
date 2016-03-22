@@ -34,10 +34,18 @@ public class SecurityUser implements Serializable {
 	 * 盐
 	 */
 	private String salt;
-//	private String empId
+	private String empId;
 	private List<SecurityRole> securityRoleList;
 	
 	private List<SecurityPermission> securityPermissionList;
+	
+	public String getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
 
 	public String getUserId() {
 		return userId;
