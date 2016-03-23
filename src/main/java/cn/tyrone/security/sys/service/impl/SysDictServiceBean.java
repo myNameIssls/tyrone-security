@@ -6,5 +6,5 @@ import cn.tyrone.security.sys.service.ISysDictService;
 
 @Service
 public class SysDictServiceBean implements ISysDictService {
-
+	
 }
