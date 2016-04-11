@@ -1,11 +1,14 @@
 
 
+	
+
 /**
  * JQueryEasyUI 增加tab页函数
  * @param title tab页标题
  * @param url	tab页请求地址
  */
 function addTab(title, url){
+	
     if ($('#tt').tabs('exists', title)){
         $('#tt').tabs('select', title);
     } else {

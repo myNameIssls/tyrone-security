@@ -8,6 +8,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.tyrone.security.sys.bean.SecurityUser;
 import cn.tyrone.security.sys.service.ISecurityUserService;
@@ -23,6 +24,12 @@ public class SecurityUserController {
 		List<SecurityUser> securityUsers = securityUserService.getDataList(securityUser);
 		model.addAttribute("itemDataList", securityUsers);
 		return "securityUser/list";
+	}
+	
+	@RequestMapping("/addUser")	@ResponseBody
+	public String addUser(SecurityUser securityUser){
+		System.out.println("新增用户");
+		return "ok";
 	}
 	
 }
