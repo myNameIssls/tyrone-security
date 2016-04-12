@@ -6,6 +6,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SysController {
@@ -35,32 +36,11 @@ public class SysController {
 		return "index";
 	}
 	
-	
-//	@RequestMapping(value = "/login", method = RequestMethod.POST)
-//	public String login(SecurityUser sysUser){
-//		
-//		String path = "home";
-//		
-//		String username = sysUser.getUsername();
-//		String password = sysUser.getPassword();
-//		
-//		AuthenticationToken token = new UsernamePasswordToken(username, password);
-//		
-//		Subject subject = SecurityUtils.getSubject();
-//		
-//		
-//		try {
-//			subject.login(token);
-//			Session session = subject.getSession();
-//			Object principal = subject.getPrincipal();
-//			System.out.println(principal);
-//		} catch (UnknownAccountException uae){
-//			uae.printStackTrace();
-//		} catch (AuthenticationException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return path;
-//	}
+	@ResponseBody
+	@RequestMapping("/getJson")
+	public String getJson(){
+		String json = "[{\"id\":\"1\",\"text\":\"系统管理\",\"children\":[{\"id\":\"11\",\"text\":\"用户管理\"},{\"id\":\"12\",\"text\":\"角色管理\"},{\"id\":\"13\",\"text\":\"权限管理\"},{\"id\":\"14\",\"text\":\"菜单管理\"},{\"id\":\"15\",\"text\":\"数据字典维护\"}]}]";
+		return json;
+	}
 	
 }
