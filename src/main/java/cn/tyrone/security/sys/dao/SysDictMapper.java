@@ -1,5 +1,7 @@
 package cn.tyrone.security.sys.dao;
 
+import java.util.List;
+
 import cn.tyrone.security.sys.bean.SysDict;
 
 public interface SysDictMapper {
@@ -14,4 +16,6 @@ public interface SysDictMapper {
     int updateByPrimaryKeySelective(SysDict record);
 
     int updateByPrimaryKey(SysDict record);
+
+	List<SysDict> getDictList(SysDict sysDict);
 }

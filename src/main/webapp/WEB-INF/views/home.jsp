@@ -12,10 +12,12 @@
 		
 		$('#tt').tree({
 			onClick: function(node){
-				alert(node.text);  
 				var children = node.children;
-				console.log(children);
-				addTab("mainTab", node.text, "http://www.baidu.com");
+				if(children){
+					console.log("1");
+				}else{
+	 				addTab("mainTab", node.text, "${ctx}" + node.url);
+				}
 			}
 		});
 		

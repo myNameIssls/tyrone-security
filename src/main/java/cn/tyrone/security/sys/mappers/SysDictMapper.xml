@@ -114,4 +114,17 @@
       AVILABLE = #{avilable,jdbcType=CHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getDictList" resultType="cn.tyrone.security.sys.bean.SysDict" resultMap="BaseResultMap">
+  		SELECT * FROM sys_dict
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

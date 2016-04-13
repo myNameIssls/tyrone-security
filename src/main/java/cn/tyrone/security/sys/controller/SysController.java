@@ -39,7 +39,7 @@ public class SysController {
 	@ResponseBody
 	@RequestMapping("/getJson")
 	public String getJson(){
-		String json = "[{\"id\":\"1\",\"text\":\"系统管理\",\"children\":[{\"id\":\"11\",\"text\":\"用户管理\"},{\"id\":\"12\",\"text\":\"角色管理\"},{\"id\":\"13\",\"text\":\"权限管理\"},{\"id\":\"14\",\"text\":\"菜单管理\"},{\"id\":\"15\",\"text\":\"数据字典维护\"}]}]";
+		String json = "[{\"id\":\"1\",\"text\":\"系统管理\",\"children\":[{\"id\":\"11\",\"text\":\"用户管理\"},{\"id\":\"12\",\"text\":\"角色管理\"},{\"id\":\"13\",\"text\":\"权限管理\"},{\"id\":\"14\",\"text\":\"菜单管理\"},{\"id\":\"15\",\"text\":\"数据字典维护\",\"url\":\"/sysDict/dictList\"}]}]";
 		return json;
 	}
 	

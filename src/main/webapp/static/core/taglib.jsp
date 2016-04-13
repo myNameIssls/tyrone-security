@@ -19,13 +19,6 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/js/jquery-easyui-1.4.3/themes/icon.css">
 <script type="text/javascript" src="${ctx}/static/js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
 
-
-<!-- <link rel="stylesheet" type="text/css" href="../demo.css"> -->
-
-<!-- BootStrap -->
-<%-- <link href="${ctx}/static/js/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --%>
-<%-- <script src="${ctx}/static/js/bootstrap/js/bootstrap.min.js"></script> --%>
-
 <!-- 自定义JQueryEasyUI -->
 <script type="text/javascript" src="${ctx}/static/js/JQueryEasyUI.js"></script>
 
