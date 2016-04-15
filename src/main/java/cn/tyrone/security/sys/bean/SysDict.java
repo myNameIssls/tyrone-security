@@ -14,9 +14,16 @@ public class SysDict {
 
     /**
 	 * 字典类型
+	 * 0：字典组类型
+	 * 1：字典类型 
 	 */
-    private String dictTypeKey;
-
+    private String dictType;
+    
+    /**
+     * 字典组类型编码
+     */
+    private String dictGroupKey;
+    
     /**
 	 * 字典类型值
 	 */
@@ -51,15 +58,15 @@ public class SysDict {
         this.id = id;
     }
 
-    public String getDictTypeKey() {
-        return dictTypeKey;
-    }
+    public String getDictType() {
+		return dictType;
+	}
 
-    public void setDictTypeKey(String dictTypeKey) {
-        this.dictTypeKey = dictTypeKey;
-    }
+	public void setDictType(String dictType) {
+		this.dictType = dictType;
+	}
 
-    public String getDictTypeValue() {
+	public String getDictTypeValue() {
         return dictTypeValue;
     }
 
@@ -98,4 +105,13 @@ public class SysDict {
     public void setAvilable(String avilable) {
         this.avilable = avilable;
     }
+
+	public String getDictGroupKey() {
+		return dictGroupKey;
+	}
+
+	public void setDictGroupKey(String dictGroupKey) {
+		this.dictGroupKey = dictGroupKey;
+	}
+    
 }

@@ -18,4 +18,13 @@ public interface SysDictMapper {
     int updateByPrimaryKey(SysDict record);
 
 	List<SysDict> getDictList(SysDict sysDict);
+
+	/**
+	 * 获取字典码
+	 * @author Tyrone.Shang
+	 * @date 2016-04-15
+	 * @param sysDict
+	 * @return
+	 */
+	List<String> getDictKeys(SysDict sysDict);
 }

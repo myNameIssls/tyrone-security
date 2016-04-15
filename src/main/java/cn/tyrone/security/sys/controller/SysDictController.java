@@ -31,4 +31,16 @@ public class SysDictController {
 		return "sysDict/dictList";
 	}
 	
+	@RequestMapping("/saveDict")
+	public String saveDict(SysDict sysDict){
+		
+		try {
+			sysDictService.saveDict(sysDict);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 }

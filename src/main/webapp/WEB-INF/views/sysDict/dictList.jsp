@@ -8,14 +8,15 @@
 <title>数据字典维护列表</title>
 
 <script type="text/javascript">
-
+	
+	// 菜单项
 	var toolbar = [{
-	    text:'新增用户',
+	    text:'新增字典',
 	    iconCls:'icon-add',
 	    handler:function(){
 	    	$('#w').window('open');
 	    }
-	},{
+	},'-',{
 	    text:'Cut',
 	    iconCls:'icon-cut',
 	    handler:function(){alert('cut')}
@@ -28,7 +29,7 @@
 	// 新增用户提交
 	function submitForm(){
         $('#ff').form('submit',{
-        	url:"${ctx}/securityUser/addUser",
+        	url:"${ctx}/sysDict/saveDict",
             onSubmit:function(){
             	var result = $(this).form('enableValidation').form('validate');
                 return result;
@@ -41,6 +42,31 @@
 	
     $(function(){
         var pager = $('#dg').datagrid().datagrid('getPager');    // get the pager of datagrid
+        
+        $('#isAvilable').switchbutton({
+            onChange: function(checked){
+                if(checked === true){
+                	$('#isAvilable').switchbutton("setValue","0");
+                }else{
+                	$('#isAvilable').switchbutton("setValue","1");
+                }
+            }
+        })
+        
+        // 
+        $('#dictType').combobox({
+            editable:false,
+        	onChange: function(param){
+        		console.log("param:" + param);
+        		if(param == 1){
+        			console.log("dictType === 1");
+            		$("#dictGroupTypeTr").show();
+            	}else{
+            		$("#dictGroupTypeTr").hide();
+            	}
+        	}
+        });
+        
     })
 </script>
 
@@ -61,10 +87,10 @@
 		        <thead>
 		            <tr>
 		            	<th field="id" checkbox="true"></th>
-		                <th data-options="field:'dictTypeKey'">字典组编码</th>
-		                <th data-options="field:'dictTypeValue'">字典组值</th>
+		                <th data-options="field:'dictType'">字典组编码</th>
+		                <th data-options="field:'dictTypeValue'">字典组类型</th>
 		                <th data-options="field:'dictKey'">字典编码</th>
-		                <th data-options="field:'dictValue'">字典值</th>
+		                <th data-options="field:'dictValue'">字典名称</th>
 		                <th data-options="field:'avilable'">是否可用</th>
 		            </tr>
 		        </thead>
@@ -72,7 +98,7 @@
 		        	<c:forEach items="${itemDataList }" var="item" >
 		        		<tr>
 		        			<td>${item.id }</td>
-		        			<td>${item.dictTypeKey }</td>
+		        			<td>${item.dictType }</td>
 		        			<td>${item.dictTypeValue }</td>
 		        			<td>${item.dictKey }</td>
 		        			<td>${item.dictValue }</td>
@@ -88,23 +114,37 @@
     <div id="w" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:600px;height:400px;padding:10px;">
         <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
             <table cellpadding="5">
-                <tr>
-                    <td>用户名:</td>
-                    <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"></input></td>
-                    <td>Email:</td>
-                    <td><input class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
-                </tr>
-                <tr>
-                    <td>Subject:</td>
-                    <td><input class="easyui-textbox" type="text" name="subject" data-options="required:true"></input></td>
-                    <td>Message:</td>
-                    <td><input class="easyui-textbox" name="message" data-options="multiline:true" style="height:60px"></input></td>
-                </tr>
-                <tr>
-                    <td>Language:</td>
+            	<tr>
+                    <td align="right">请选择字典类型:</td>
                     <td>
-                        <select class="easyui-combobox" name="language"><option value="ar">Arabic</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="zh-cht">Chinese Traditional</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="en" selected="selected">English</option><option value="et">Estonian</option><option value="fi">Finnish</option><option value="fr">French</option><option value="de">German</option><option value="el">Greek</option><option value="ht">Haitian Creole</option><option value="he">Hebrew</option><option value="hi">Hindi</option><option value="mww">Hmong Daw</option><option value="hu">Hungarian</option><option value="id">Indonesian</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sv">Swedish</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="vi">Vietnamese</option></select>
+                    	<select class="easyui-combobox" data-options="required:true" id= "dictType" name="dictType" style="width: 150px;">
+                    		<option>-- 请选择字典类型 --</option>
+							<option value="0">&nbsp;字典组类型</option>
+							<option value="1">&nbsp;字典类型</option>        
+						</select>
                     </td>
+                </tr>
+                
+                <tr id="dictGroupTypeTr" style="display: none;">
+                    <td align="right">请选择字典组类型:</td>
+                    <td>
+                    	<!-- 需要查询数据库加载 -->
+                    	<select class="easyui-combobox" id= "dictGroupKey" disabled="disabled" name="dictGroupKey" style="width: 150px;">
+                    		<option>-- 请选择字典组 --</option>
+							<option value="001">角色组类型</option>
+							<option value="002">机构组类型</option>
+							<option value="003">职位组类型</option>
+						</select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td align="right">请输入字典名称:</td>
+                    <td><input class="easyui-textbox" type="text" name="dictValue" data-options="required:true"></input></td>
+                </tr>
+                <tr>
+                    <td align="right" style="width:180px">是否可用:</td>
+            		<td><input class="easyui-switchbutton" id = "isAvilable" name="avilable" checked></td>
                 </tr>
             </table>
         </form>
