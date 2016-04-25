@@ -9,6 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.google.gson.JsonArray;
+
+import cn.tyrone.security.core.bean.ResponseBean;
+import cn.tyrone.security.core.util.JSONUtil;
 import cn.tyrone.security.sys.bean.SysDict;
 import cn.tyrone.security.sys.service.ISysDictService;
 
@@ -33,14 +38,15 @@ public class SysDictController {
 	
 	@RequestMapping("/saveDict")
 	public String saveDict(SysDict sysDict){
-		
+		ResponseBean responseBean = null;
 		try {
 			sysDictService.saveDict(sysDict);
+			responseBean = new ResponseBean("0", "操作成功");
 		} catch (Exception e) {
 			e.printStackTrace();
+			responseBean = new ResponseBean("1", "操作失败");
 		}
-		
-		return null;
+		return JSONUtil.getJson(responseBean);
 	}
 	
 }

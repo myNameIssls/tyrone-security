@@ -41,8 +41,20 @@
     }
 	
     $(function(){
-        var pager = $('#dg').datagrid().datagrid('getPager');    // get the pager of datagrid
-        
+    	
+    	// 加载数据列表
+    	$('#dg').datagrid({
+			singleSelect:true,
+			checkOnSelect:false,
+			selectOnCheck:false,
+			rownumbers:true,
+			toolbar:toolbar,
+			fit:true,
+			fitColumns:false,
+			pagination:true,
+			pageList:[10,20,30,40,50]
+    	});
+    	
         $('#isAvilable').switchbutton({
             onChange: function(checked){
                 if(checked === true){
@@ -57,12 +69,13 @@
         $('#dictType').combobox({
             editable:false,
         	onChange: function(param){
-        		console.log("param:" + param);
         		if(param == 1){
         			console.log("dictType === 1");
             		$("#dictGroupTypeTr").show();
+            		$('#dictGroupKey').combobox('enable');
             	}else{
             		$("#dictGroupTypeTr").hide();
+            		$('#dictGroupKey').combobox('disable');
             	}
         	}
         });
@@ -81,32 +94,29 @@
         	</form>
         </div>
         <div data-options="region:'center'" border = 'false'>
-		    <table id="dg" title="用户列表" style="width:100%;height:100%" border = 'false'
-		            data-options="singleSelect:true,checkOnSelect:false,selectOnCheck:false,
-		            			  rownumbers:true,pagination:true,method:'get',toolbar:toolbar,fitColumns:false"  fit = 'true'>
-		        <thead>
+        
+        	<table id="dg">
+        		<thead>
 		            <tr>
 		            	<th field="id" checkbox="true"></th>
-		                <th data-options="field:'dictType'">字典组编码</th>
-		                <th data-options="field:'dictTypeValue'">字典组类型</th>
 		                <th data-options="field:'dictKey'">字典编码</th>
 		                <th data-options="field:'dictValue'">字典名称</th>
+		                <th data-options="field:'dictTypeValue'">字典类型</th>
 		                <th data-options="field:'avilable'">是否可用</th>
 		            </tr>
 		        </thead>
-		        	
-		        	<c:forEach items="${itemDataList }" var="item" >
-		        		<tr>
-		        			<td>${item.id }</td>
-		        			<td>${item.dictType }</td>
-		        			<td>${item.dictTypeValue }</td>
-		        			<td>${item.dictKey }</td>
-		        			<td>${item.dictValue }</td>
-		        			<td>${item.avilable }</td>
-		        		</tr>
-		        	</c:forEach>
-		        	
-		    </table>
+		        
+		        <c:forEach items="${itemDataList }" var="item" >
+	        		<tr>
+	        			<td>${item.id }</td>
+	        			<td>${item.dictKey }</td>
+	        			<td>${item.dictValue }</td>
+	        			<td>${item.dictType }</td>
+	        			<td>${item.dictTypeValue }</td>
+	        			<td>${item.avilable }</td>
+	        		</tr>
+	        	</c:forEach>
+        	</table>
         </div>
     </div> 
     
@@ -134,6 +144,7 @@
 							<option value="001">角色组类型</option>
 							<option value="002">机构组类型</option>
 							<option value="003">职位组类型</option>
+							<option value="170">slsadmin</option>
 						</select>
                     </td>
                 </tr>

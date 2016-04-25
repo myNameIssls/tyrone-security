@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import com.google.gson.Gson;
+
 /**
  * 字符串工具类
  * @author Tyrone.Shang
@@ -43,7 +45,7 @@ public class StringUtil {
 			}
 			return splitStr + getRandomCode(tmpCodes, num);
 		}
-		return null;
+		return splitStr + getRandomCode(num);
 	}
 	
 	/**

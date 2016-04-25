@@ -35,6 +35,4 @@ public class ResponseBean {
 		this.message = message;
 	}
 	
-	
-	
 }
