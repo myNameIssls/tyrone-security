@@ -9,23 +9,6 @@
 
 <script type="text/javascript">
 	
-	// 菜单项
-	var toolbar = [{
-	    text:'新增字典',
-	    iconCls:'icon-add',
-	    handler:function(){
-	    	$('#w').window('open');
-	    }
-	},'-',{
-	    text:'Cut',
-	    iconCls:'icon-cut',
-	    handler:function(){alert('cut')}
-	},'-',{
-	    text:'Save',
-	    iconCls:'icon-save',
-	    handler:function(){alert('save')}
-	}];
-
 	// 新增用户提交
 	function submitForm(){
         $('#ff').form('submit',{
@@ -44,16 +27,24 @@
     	
     	// 加载数据列表
     	$('#dg').datagrid({
+    		pagination:true,//显示分页  
+            pageSize:5,//分页大小  
+            pageList:[5,10,15,20],//每页的个数
 			singleSelect:true,
 			checkOnSelect:false,
 			selectOnCheck:false,
 			rownumbers:true,
-			toolbar:toolbar,
 			fit:true,
-			fitColumns:false,
-			pagination:true,
-			pageList:[10,20,30,40,50]
+			fitColumns:false
     	});
+    	var p = $('#dg').datagrid('getPager');
+    	$(p).pagination({
+            pageSize: 10,//每页显示的记录条数，默认为10  
+            pageList: [5, 10, 15],//可以设置每页记录条数的列表  
+            beforePageText: '第',//页数文本框前显示的汉字  
+            afterPageText: '页    共 {pages} 页',
+            displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+        });
     	
         $('#isAvilable').switchbutton({
             onChange: function(checked){
@@ -70,7 +61,6 @@
             editable:false,
         	onChange: function(param){
         		if(param == 1){
-        			console.log("dictType === 1");
             		$("#dictGroupTypeTr").show();
             		$('#dictGroupKey').combobox('enable');
             	}else{
@@ -94,15 +84,23 @@
         	</form>
         </div>
         <div data-options="region:'center'" border = 'false'>
-        
+        	
+        	<div style="padding:5px 0;">
+        		<shiro:hasPermission name="sysDict:saveDict" >
+			        <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">新增字典</a>
+        		</shiro:hasPermission>
+		        <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">导出字典</a>
+		    </div>
+        	
         	<table id="dg">
         		<thead>
 		            <tr>
 		            	<th field="id" checkbox="true"></th>
 		                <th data-options="field:'dictKey'">字典编码</th>
 		                <th data-options="field:'dictValue'">字典名称</th>
-		                <th data-options="field:'dictTypeValue'">字典类型</th>
+		                <th data-options="field:'dictType'">字典类型</th>
 		                <th data-options="field:'avilable'">是否可用</th>
+		                <th data-options="field:'cz'">操作</th>
 		            </tr>
 		        </thead>
 		        
@@ -112,8 +110,11 @@
 	        			<td>${item.dictKey }</td>
 	        			<td>${item.dictValue }</td>
 	        			<td>${item.dictType }</td>
-	        			<td>${item.dictTypeValue }</td>
 	        			<td>${item.avilable }</td>
+	        			<td>
+	        				<a href="#" class="easyui-linkbutton" data-options="plain:true">编辑</a>
+							<a href="#" class="easyui-linkbutton" data-options="plain:true">删除</a>
+	        			</td>
 	        		</tr>
 	        	</c:forEach>
         	</table>
@@ -130,7 +131,7 @@
                     	<select class="easyui-combobox" data-options="required:true" id= "dictType" name="dictType" style="width: 150px;">
                     		<option>-- 请选择字典类型 --</option>
 							<option value="0">&nbsp;字典组类型</option>
-							<option value="1">&nbsp;字典类型</option>        
+							<option value="1">&nbsp;字典类型</option>
 						</select>
                     </td>
                 </tr>

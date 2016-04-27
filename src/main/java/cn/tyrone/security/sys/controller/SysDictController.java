@@ -5,12 +5,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.alibaba.druid.support.json.JSONUtils;
-import com.google.gson.JsonArray;
 
 import cn.tyrone.security.core.bean.ResponseBean;
 import cn.tyrone.security.core.util.JSONUtil;
@@ -37,6 +35,7 @@ public class SysDictController {
 	}
 	
 	@RequestMapping("/saveDict")
+	@RequiresPermissions("sysDict:saveDict")
 	public String saveDict(SysDict sysDict){
 		ResponseBean responseBean = null;
 		try {
